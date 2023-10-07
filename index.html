@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="w-full h-screen bg-gradient-to-r from-red-600 to-blue-400 flex justify-center items-center">
+        <div class="w-96 h-[70vh]  p-5  bg-black shadow-xl">
+         <div class="w-full h-[30vh] ">
+            <div class="w-[190px] h-[190px] bg-red-600  mx-auto rounded-full relative  before:content-[''] before:w-[170px] before:h-[170px] before:flex before:mx-auto before:rounded-full before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:bg-white before:absolute after:absolute after:content-[''] after:left-[50%] after:top-[50%] after:translate-x-[-50%] after:translate-y-[-50%] after:w-[15px] after:h-[15px] after:rounded-full after:bg-black">
+                <div id="hr" class="hidden absolute w-1 h-9 bg-black left-[50%] top-[32%] rounded-md translate-x-[-50%] origin-bottom   translate-y-[-50%]"></div>
+                <div id="min" class=" hidden absolute w-1 h-14 bg-red-500 left-[50%] top-[22%] rounded-md translate-x-[-50%] origin-bottom   translate-y-[-50%]"></div>
+                <div id="sec" class="hidden absolute w-1 h-20 bg-green-500 left-[50%] top-[9%] rounded-md translate-x-[-50%] origin-bottom   translate-y-[-50%]"></div>
+                <h2 id="ampm" class="text-md text-black uppercase font-black absolute left-[50%] top-[80%] translate-x-[-50%]">am</h2>
+                
+            </div>
+            <div class="w-full  text-white flex mt-6 justify-center text-2xl font-black">
+                <h2>00</h2><span>:</span><h2>00</h2><span>:</span><h2>00</h2>
+            </div>
+            <div class="w-full xsm:h-[17vh] xl:h-[18vh]  text-white text-center text-2xl p-6 ">
+                <h1 class="uppercase font-black">Tehran</h1>
+                <h2 class="uppercase mt-3">sunday</h2>
+            </div>
+            <div class="flex justify-center ">
+                <button class="flex justify-center  "><i class="bi bi-brightness-high-fill text-[yellow] text-4xl"></i></button>
+            </div>
+
+         </div>   
+        
+        </div>
+    </div>
+</body>
+<script>
+    let hour = document.getElementById('hr')
+    let min = document.getElementById('min')
+    let sec = document.getElementById('sec')
+    let week=['SUNDAY','MONDAY','TUESDAY','WEDENSDAY','THURSDAY','FRIDAY','SATURDAY']
+    let date = new Date()
+
+    let day = date.getDay()
+   let h2= document.getElementsByTagName('h2')[4]
+    h2.innerText=week[day]
+   let i=  document.getElementsByTagName('i')[0]
+   const div1 = document.getElementsByTagName('div')[0]
+   const div2 = document.getElementsByTagName('div')[1]
+   let div3 =document.querySelectorAll('.text-white')
+   let ampm = document.getElementById('ampm')
+   h22 = document.getElementsByTagName('h2')
+   let hours = date.getHours()
+   setInterval(()=>{
+    let date = new Date()
+    let hours = date.getHours()
+   let minutes =date.getMinutes()
+   let seconds = date.getSeconds()
+    h22[1].innerHTML=`${hours}`
+   h22[2].innerText=`${minutes}`
+   h22[3].innerHTML=`${seconds}`
+   let hourT = 30*hours+minutes/2
+   let minuteT = 6*minutes
+   let secondT= 6 *seconds
+   if(hours<10){
+    h22[1].innerHTML='0'+hours
+   }
+   if(minutes<10){
+    h22[2].innerHTML='0'+minutes
+   }
+   if(seconds<10){
+    h22[3].innerHTML='0'+seconds
+   }
+   hour.style.transform=`rotate(${hourT}deg)`
+   hour.style.transformOrigin='bottom center'
+   min.style.transform=`rotate(${minuteT}deg)`
+   sec.style.transform=`rotate(${secondT}deg)`
+   hour.style.display='flex'
+   min.style.display='flex'
+   sec.style.display='flex'
+   },1000)
+   
+   if(hours>12){
+    ampm.innerHTML='PM'
+   }else{
+    ampm.innerHTML='AM'
+   }
+   console.log(div3);
+   i.addEventListener('click',()=>{
+    classs=i.classList.toggle('bi-moon-fill')
+    if(classs==true){
+        div1.style.backgroundImage='linear-gradient(to right , black , white) '
+        div2.style.background='white'
+        i.style.color='black'
+        div3.forEach(val=>{
+            val.classList.remove('text-white')
+            val.classList.add('text-black')
+        })
+    }
+    else{
+        div1.style.backgroundImage='linear-gradient(to right , white , black) '
+        div1.style.backgroundColor='white'
+        div2.style.background='black'
+        i.style.color='yellow'
+        div3.forEach(val=>{
+            val.classList.remove('text-black')
+            val.classList.add('text-white')
+        })    }
+   })
+    // <i class="bi bi-moon-fill"></i>
+</script>
+</html>
